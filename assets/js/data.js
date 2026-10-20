@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVA · 全站内容源
+   小佑 · 全站内容源
    ------------------------------------------------------------
    你只需要改这个文件，就能更新整站内容（作品 / Skills / 配音 / 关于）。
    改完保存，刷新浏览器即可看到效果，不需要构建、不需要联网。
@@ -14,11 +14,11 @@
 window.SITE_DATA = {
   /* ---------- 站点与个人信息 ---------- */
   profile: {
-    brand: "NOVA",                       // 左上角 Logo 文字
-    name: "NOVA",                        // 你的名字 / ID
+    brand: "小佑",                       // 左上角 Logo 文字
+    name: "小佑",                        // 你的名字 / ID
     role: "独立开发者 · AI 工作流玩家",
-    email: "hello@nova.studio",          // 改成你的邮箱
-    location: "中国 · 杭州",
+    email: "hello@xiaoyou.studio",          // 改成你的邮箱
+    location: "中国 · 上海",
     available: "可接新项目",              // 首页徽标文案
     headline: "把想法，做成<br><span class=\"grad\">能看 · 能用 · 能听</span>",
     lead: "这里是我的数字仓库：自己写的网站与程序、每天在用的 AI Skills，以及可以直接下载使用的配音素材。喜欢把复杂的事，做成一键就能跑的样子。",
@@ -26,7 +26,7 @@ window.SITE_DATA = {
       { label: "GitHub", href: "https://github.com/" },
       { label: "Bilibili", href: "https://space.bilibili.com/" },
       { label: "小红书", href: "https://www.xiaohongshu.com/" },
-      { label: "Email", href: "mailto:hello@nova.studio" }
+      { label: "Email", href: "mailto:hello@xiaoyou.studio" }
     ],
     stats: [
       { value: "12", label: "上线项目" },
@@ -38,6 +38,25 @@ window.SITE_DATA = {
       "打磨「AI 配音工作台 v2」：批量转写 + 多音色试听",
       "整理 HyperFrames 视频模板，目标一条命令出片",
       "把常用提示词沉淀成可复用的 Skill 包"
+    ],
+
+    /* 首页「自我介绍」那一面 */
+    intro: {
+      title: "你好，我是小佑。",
+      lead: "一个在上海写代码的人。做网站、做小工具，也把 AI 塞进每天的工作流里——能自动的事，绝不手动做第二遍。",
+      facts: [
+        { k: "所在地", v: "上海" },
+        { k: "身份", v: "独立开发者" },
+        { k: "在做", v: "网站 / 工具 / AI 工作流" },
+        { k: "状态", v: "可接新项目" }
+      ]
+    },
+
+    /* 关于页的完整自我介绍（每一条是一段） */
+    about: [
+      "我是小佑，独立开发者，现居上海。从设计稿到上线，习惯一个人把整条链路跑完：写页面、搭服务、接支付、做数据，哪里缺人就补哪里。",
+      "我真正着迷的不是「AI 能做什么」，而是「哪些事终于可以不用人做了」。所以我把重复的流程写成 Skill：视频、配音、文档、数据各有一条固定流水线，质量稳定，还能反复复用。",
+      "这个站本身也是一件作品：纯静态、零依赖，不加载任何外部字体和追踪脚本。你可以直接右键查看源码，或者把它下载走，改成自己的版本。"
     ]
   },
 
@@ -46,7 +65,7 @@ window.SITE_DATA = {
   */
   works: [
     {
-      id: "nova-home",
+      id: "xiaoyou-home",
       title: "个人主页 2.0",
       summary: "从零手写的作品集站点，暗色玻璃质感 + 滚动动效，Lighthouse 移动端 98 分。",
       type: "网站",

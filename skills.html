@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Skills · NOVA</title>
+  <meta name="description" content="NOVA 日常使用的 AI Skills：视频成片、配音字幕、文档流水线、网页原型、提示词工坊、数据清洗。" />
+  <meta name="theme-color" content="#05070c" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="skills">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="NOVA 首页">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 21 7.6v8.8L12 21.5 3 16.4V7.6L12 2.5Z"/><path d="m8.2 12.2 2.6 2.6 5-5.4"/></svg>
+        </span>
+        <span data-bind="brand">NOVA</span>
+      </a>
+
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html" data-nav="home">首页</a>
+        <a href="works.html" data-nav="works">作品</a>
+        <a href="skills.html" data-nav="skills">Skills</a>
+        <a href="voice.html" data-nav="voice">配音</a>
+        <a href="about.html" data-nav="about">关于</a>
+      </nav>
+
+      <div class="header-cta">
+        <a class="btn btn-ghost btn-sm" href="about.html#contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          联系我
+        </a>
+        <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" data-nav="home">首页 <span>01</span></a>
+    <a href="works.html" data-nav="works">作品 <span>02</span></a>
+    <a href="skills.html" data-nav="skills">Skills <span>03</span></a>
+    <a href="voice.html" data-nav="voice">配音 <span>04</span></a>
+    <a href="about.html" data-nav="about">关于 <span>05</span></a>
+  </div>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">AI SKILLS · 工作流</span>
+        <h1>一句话，<br />跑完一整条流水线。</h1>
+        <p>Skill 是我给 AI 写好的「作业流程」：知道该拆几步、用什么工具、产出什么格式。下面这些是日常在用的，点右上角可以复制调用命令。</p>
+        <div class="head-meta">
+          <span class="chip is-accent">6 个常用 Skill</span>
+          <span class="chip">视频 / 音频 / 办公 / 开发</span>
+          <span class="chip">持续迭代</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="skill-grid" data-skills></div>
+      </div>
+    </section>
+
+    <!-- 工作方式 -->
+    <section class="section" style="padding-top: 0">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div>
+            <span class="idx">HOW IT WORKS</span>
+            <h2>它是怎么跑起来的</h2>
+            <p>不需要记命令，也不需要懂代码。你只需要把目标说清楚。</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step" data-reveal>
+            <span class="step-num">01</span>
+            <h3>说清目标</h3>
+            <p>一句自然语言：做什么、给谁看、要多长、什么风格。模糊的地方它会反问。</p>
+          </div>
+          <div class="step" data-reveal style="--d: 90ms">
+            <span class="step-num">02</span>
+            <h3>自动拆解</h3>
+            <p>拆步骤、选工具、排顺序；能并行的并行跑，卡住了会换方案而不是硬等。</p>
+          </div>
+          <div class="step" data-reveal style="--d: 180ms">
+            <span class="step-num">03</span>
+            <h3>交付成品</h3>
+            <p>视频、音频、文档、表格或一个能打开的网页——拿到就能直接用，不是一段建议。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="cta" data-reveal>
+        <span class="eyebrow">CUSTOM SKILL</span>
+        <h2 style="margin-top: 16px">没有现成的？<br />那就现搭一个。</h2>
+        <p>把你手上最重复的那件事告诉我——每周写周报、整理素材、批量改图、给视频加字幕——我可以帮你把它变成一条固定流水线。</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" data-email href="mailto:hello@nova.studio" data-email-text>hello@nova.studio</a>
+          <a class="btn btn-ghost" href="voice.html">先听听产出效果</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="index.html">
+            <span class="logo-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 21 7.6v8.8L12 21.5 3 16.4V7.6L12 2.5Z"/><path d="m8.2 12.2 2.6 2.6 5-5.4"/></svg>
+            </span>
+            <span data-bind="brand">NOVA</span>
+          </a>
+          <p>一个独立开发者的数字仓库。把想法做成能看、能用、能听的东西。</p>
+        </div>
+        <div class="footer-col">
+          <h4>站点</h4>
+          <a href="works.html">作品</a>
+          <a href="skills.html">AI Skills</a>
+          <a href="voice.html">配音素材</a>
+          <a href="about.html">关于我</a>
+        </div>
+        <div class="footer-col">
+          <h4>找到我</h4>
+          <div data-socials>
+            <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://space.bilibili.com/" target="_blank" rel="noopener">Bilibili</a>
+            <a href="mailto:hello@nova.studio">Email</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> NOVA · 保留所有权利</span>
+        <span>DESIGNED IN THE DARK · BUILT WITH AI</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

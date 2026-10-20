@@ -1509,6 +1509,59 @@ body.nav-open .mobile-menu { display: flex; }
   .profile-card { max-width: 460px; }
 }
 
+/* 自我介绍页 */
+.intro-profile {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+.intro-card {
+  position: sticky;
+  top: calc(var(--header-h) + 28px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px;
+  background: linear-gradient(160deg, rgba(94, 234, 212, 0.08), rgba(255, 255, 255, 0.015));
+  box-shadow: 0 30px 60px -40px #000;
+}
+.avatar-lg {
+  width: 84px;
+  height: 84px;
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+.intro-card h2 {
+  font-size: 24px;
+  letter-spacing: -0.01em;
+}
+.intro-role {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.intro-card .profile-facts {
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+.intro-card .btn { width: 100%; }
+.intro-story-title {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+.intro-story .about-copy p {
+  font-size: 15.5px;
+  line-height: 2;
+}
+
+@media (max-width: 940px) {
+  .intro-profile { grid-template-columns: 1fr; gap: 34px; }
+  .intro-card { position: static; max-width: 460px; }
+}
+
 /* 打印 */
 @media print {
   .site-header, .mobile-menu, .site-footer, .float-chip, .marquee { display: none !important; }

@@ -14,7 +14,8 @@
 | 作品 | `works.html` | 全部项目，可按「网站 / 程序 / 实验」筛选 |
 | Skills | `skills.html` | 6 个 AI Skill 卡片、调用命令（可一键复制）、工作方式说明 |
 | 配音 | `voice.html` | 试听、进度拖动、下载 MP3，附使用许可说明 |
-| 关于 | `about.html` | 自我介绍、最近在忙、时间线、联系方式 |
+| 自我介绍 | `intro.html` | 资料卡、长版自我介绍、「我在做的事」 |
+| 关于 | `about.html` | 简介、最近在忙、时间线、联系方式 |
 
 ## 本地打开
 
@@ -48,8 +49,9 @@ python -m http.server 8000
 | `socials` | 社交链接数组，页脚与关于页自动生成 |
 | `stats` | 首页四个数字，`40+` 这类带后缀的写法也能正确显示 |
 | `now` | 关于页「最近在忙」列表 |
-| `intro` | 首页「自我介绍」那一面：`title` 标题、`lead` 正文、`facts` 右侧资料卡 |
-| `about` | 关于页的完整自我介绍，数组里每条是一段 |
+| `intro` | 自我介绍页：`title` 标题、`lead` 正文、`facts` 左侧资料卡 |
+| `doing` | 自我介绍页「我在做的事」三张卡片 |
+| `about` | 完整自我介绍（自我介绍页 + 关于页），数组里每条是一段 |
 
 **works（作品）**
 
@@ -153,6 +155,7 @@ portfolio/
 ├─ works.html          作品
 ├─ skills.html         AI Skills
 ├─ voice.html          配音
+├─ intro.html          自我介绍
 ├─ about.html          关于
 ├─ assets/
 │  ├─ css/style.css    全部样式（含配色变量与响应式）

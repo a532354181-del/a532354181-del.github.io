@@ -1300,10 +1300,14 @@ body.nav-open .mobile-menu { display: flex; }
 
 /* ---------- 17. 动效 ---------- */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
   transition-delay: var(--d, 0ms);
+}
+body.motion-ready [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(20px);
 }
 [data-reveal].is-in { opacity: 1; transform: none; }
 
@@ -1393,7 +1397,7 @@ body.nav-open .mobile-menu { display: flex; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  [data-reveal] { opacity: 1; transform: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
 /* ---------- 19. 工作方式 / 联系方式 ---------- */
@@ -1594,6 +1598,122 @@ body.nav-open .mobile-menu { display: flex; }
 @media (max-width: 940px) {
   .intro-profile { grid-template-columns: 1fr; gap: 34px; }
   .intro-card { position: static; max-width: 460px; }
+}
+
+/* ---------- 21. 渐进增强动效：由 main.js 的 motion-ready 开启 ---------- */
+@keyframes motion-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes motion-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes gradient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes atmosphere-drift {
+  from { transform: translate3d(-1%, 0, 0); }
+  to { transform: translate3d(1%, 2%, 0); }
+}
+
+body.motion-ready .hero-copy > *,
+body.motion-ready .page-head > .wrap > * {
+  animation: motion-enter 700ms var(--ease) both;
+}
+body.motion-ready .hero-copy > :nth-child(2),
+body.motion-ready .page-head > .wrap > :nth-child(2) { animation-delay: 90ms; }
+body.motion-ready .hero-copy > :nth-child(3),
+body.motion-ready .page-head > .wrap > :nth-child(3) { animation-delay: 180ms; }
+body.motion-ready .hero-copy > :nth-child(4),
+body.motion-ready .page-head > .wrap > :nth-child(4) { animation-delay: 270ms; }
+body.motion-ready .hero-copy > :nth-child(5) { animation-delay: 360ms; }
+body.motion-ready .hero-visual { animation: motion-fade 900ms var(--ease) 180ms both; }
+body.motion-ready .hero h1 .grad {
+  background-size: 220% 100%;
+  animation: gradient-drift 12s ease-in-out infinite;
+}
+body.motion-ready .bg-layer::before {
+  animation: atmosphere-drift 18s ease-in-out infinite alternate;
+}
+body.motion-ready .term-body .ln {
+  animation: motion-enter 450ms var(--ease) both;
+  animation-delay: var(--line-delay, 0ms);
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 110;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.065), transparent 62%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Include reveal state so its completed transform cannot suppress hover. */
+  body.motion-ready :is(.work-card, .skill-card):not([data-reveal]):hover,
+  body.motion-ready :is(.work-card, .skill-card)[data-reveal].is-in:hover {
+    transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition-delay: 0ms;
+  }
+  body.motion-ready :is(.work-card, .skill-card).is-pointing {
+    transition-property: transform, border-color, box-shadow, opacity;
+    transition-duration: 100ms, 300ms, 400ms, 350ms;
+    transition-delay: 0ms;
+  }
+  body.motion-ready .skill-card:hover::before { opacity: 1; }
+}
+body.motion-ready :is(.work-card, .skill-card):focus-visible,
+body.motion-ready :is(.work-card, .skill-card):has(:focus-visible) {
+  opacity: 1;
+  transform: translateY(-4px) !important;
+  transition-delay: 0ms;
+}
+body.motion-ready.nav-open .mobile-menu a {
+  animation: motion-enter 220ms var(--ease) both;
+}
+body.motion-ready.nav-open .mobile-menu a:nth-child(2) { animation-delay: 25ms; }
+body.motion-ready.nav-open .mobile-menu a:nth-child(3) { animation-delay: 50ms; }
+body.motion-ready.nav-open .mobile-menu a:nth-child(4) { animation-delay: 75ms; }
+body.motion-ready.nav-open .mobile-menu a:nth-child(5) { animation-delay: 100ms; }
+body.motion-ready.nav-open .mobile-menu a:nth-child(6) { animation-delay: 125ms; }
+
+@media (max-width: 640px), (hover: none), (pointer: coarse) {
+  body.motion-ready .bg-layer::before { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  body.motion-ready [data-reveal],
+  body.motion-ready .hero-copy > *,
+  body.motion-ready .page-head > .wrap > *,
+  body.motion-ready .hero-visual,
+  body.motion-ready .term-body .ln,
+  body.motion-ready.nav-open .mobile-menu a,
+  body.motion-ready :is(.work-card, .skill-card),
+  body.motion-ready :is(.work-card, .skill-card):focus-visible,
+  body.motion-ready :is(.work-card, .skill-card):has(:focus-visible),
+  body.motion-ready .bg-layer::before {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* 打印 */

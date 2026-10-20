@@ -269,12 +269,13 @@
   }
 
   /* ---------- 数字滚动 ---------- */
-  function countUp(el) {
+  function countUp(el, shouldReduce) {
     var raw = el.textContent.trim();
     var m = raw.match(/^(\d+)(.*)$/);
     if (!m) return;
     var target = Number(m[1]), suffix = m[2] || "", start = null;
     function step(ts) {
+      if (shouldReduce && shouldReduce()) { el.textContent = raw; return; }
       if (!start) start = ts;
       var p = Math.min(1, (ts - start) / 900);
       var eased = 1 - Math.pow(1 - p, 3);
@@ -287,12 +288,28 @@
 
   /* ---------- 导航 / 滚动 / 动效 ---------- */
   function bindUI() {
+    var motionQuery = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)");
+    var reduceMotion = !!(motionQuery && motionQuery.matches);
     var header = $(".site-header");
-    var onScroll = function () {
+    var progress = document.createElement("div");
+    progress.className = "scroll-progress";
+    progress.setAttribute("aria-hidden", "true");
+    document.body.appendChild(progress);
+    var scrollFrame = 0;
+    function updateScroll() {
       if (header) header.classList.toggle("is-stuck", window.scrollY > 12);
-    };
+      var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      var ratio = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+      progress.style.transform = "scaleX(" + ratio + ")";
+    }
+    function onScroll() {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(function () { scrollFrame = 0; updateScroll(); });
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateScroll();
 
     var toggle = $(".nav-toggle");
     if (toggle) {
@@ -314,7 +331,6 @@
       });
     }
 
-    /* 当前页高亮 */
     var page = document.body.getAttribute("data-page");
     if (page) {
       $$(".nav a, .mobile-menu a").forEach(function (a) {
@@ -322,45 +338,94 @@
       });
     }
 
-    /* 入场动画 */
+    $$(".term-body .ln").forEach(function (line, i) {
+      line.style.setProperty("--line-delay", (220 + i * 65) + "ms");
+    });
+    $$(".voice-row, .stat, .tl-item").forEach(function (el, i) {
+      el.setAttribute("data-reveal", "");
+      if (!el.style.getPropertyValue("--d")) el.style.setProperty("--d", (i % 4) * 65 + "ms");
+    });
     var items = $$("[data-reveal]");
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
+    var io = null;
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (en.isIntersecting) {
             en.target.classList.add("is-in");
             io.unobserve(en.target);
           }
         });
-      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      }, { rootMargin: "0px 0px -5% 0px", threshold: 0.08 });
       items.forEach(function (el) { io.observe(el); });
     } else {
       items.forEach(function (el) { el.classList.add("is-in"); });
     }
 
-    /* 卡片光斑 */
-    $$(".work-card").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty("--mx", (e.clientX - r.left) + "px");
-        card.style.setProperty("--my", (e.clientY - r.top) + "px");
-      });
+    var resetCards = [];
+    $$(".work-card, .skill-card").forEach(function (card) {
+      var frame = 0, x = 0, y = 0;
+      function reset() {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        card.classList.remove("is-pointing");
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+        card.style.setProperty("--mx", "50%");
+        card.style.setProperty("--my", "50%");
+      }
+      resetCards.push(reset);
+      card.addEventListener("pointermove", function (e) {
+        if (reduceMotion || !finePointer || !finePointer.matches || e.pointerType !== "mouse") return;
+        x = e.clientX; y = e.clientY;
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = 0;
+          if (reduceMotion || !finePointer.matches) { reset(); return; }
+          var rect = card.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          var px = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+          var py = Math.max(0, Math.min(1, (y - rect.top) / rect.height));
+          card.classList.add("is-pointing");
+          card.style.setProperty("--rx", ((0.5 - py) * 6).toFixed(2) + "deg");
+          card.style.setProperty("--ry", ((px - 0.5) * 6).toFixed(2) + "deg");
+          card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+          card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+        });
+      }, { passive: true });
+      card.addEventListener("pointerleave", reset);
+      card.addEventListener("pointercancel", reset);
     });
+    window.addEventListener("blur", function () { resetCards.forEach(function (reset) { reset(); }); });
 
-    /* 页脚年份 */
     $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
-
-    /* 统计数字（尊重「减少动态效果」偏好，直接显示终值） */
     var stats = $$(".stat b");
-    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var so = null;
     if (stats.length && !reduceMotion && "IntersectionObserver" in window) {
-      var so = new IntersectionObserver(function (entries) {
+      so = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) { countUp(en.target); so.unobserve(en.target); }
+          if (en.isIntersecting) {
+            countUp(en.target, function () { return reduceMotion; });
+            so.unobserve(en.target);
+          }
         });
       }, { threshold: 0.6 });
       stats.forEach(function (el) { so.observe(el); });
     }
+    function syncMotionPreference() {
+      reduceMotion = !!(motionQuery && motionQuery.matches);
+      document.body.classList.toggle("motion-ready", !reduceMotion);
+      if (reduceMotion) {
+        if (io) io.disconnect();
+        if (so) so.disconnect();
+        items.forEach(function (el) { el.classList.add("is-in"); });
+        resetCards.forEach(function (reset) { reset(); });
+      }
+    }
+    if (motionQuery) {
+      if (motionQuery.addEventListener) motionQuery.addEventListener("change", syncMotionPreference);
+      else if (motionQuery.addListener) motionQuery.addListener(syncMotionPreference);
+    }
+    syncMotionPreference();
   }
 
   /* ---------- 个人信息绑定 ---------- */

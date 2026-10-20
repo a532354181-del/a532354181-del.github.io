@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVA · 站点交互与渲染
+   小佑 · 站点交互与渲染
    依赖 data.js 中的 window.SITE_DATA，无需构建工具。
    ============================================================ */
 (function () {
@@ -411,9 +411,33 @@
     }
   }
 
+  /* ---------- 自我介绍 ---------- */
+  function mountIntro() {
+    var p = DATA.profile || {};
+    var intro = p.intro || {};
+
+    $$("[data-intro-title]").forEach(function (el) {
+      if (intro.title) el.textContent = intro.title;
+    });
+    $$("[data-intro-lead]").forEach(function (el) {
+      if (intro.lead) el.textContent = intro.lead;
+    });
+    $$("[data-intro-facts]").forEach(function (box) {
+      if (!intro.facts) return;
+      box.innerHTML = intro.facts.map(function (f) {
+        return "<li><span>" + esc(f.k) + "</span><b>" + esc(f.v) + "</b></li>";
+      }).join("");
+    });
+    $$("[data-about]").forEach(function (box) {
+      if (!p.about) return;
+      box.innerHTML = p.about.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    });
+  }
+
   /* ---------- 启动 ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     mountProfile();
+    mountIntro();
     mountWorks();
     mountSkills();
     mountVoices();

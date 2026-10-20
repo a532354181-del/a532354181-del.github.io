@@ -432,6 +432,14 @@
       if (!p.about) return;
       box.innerHTML = p.about.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
     });
+    $$("[data-doing]").forEach(function (box) {
+      if (!p.doing) return;
+      box.innerHTML = p.doing.map(function (d, i) {
+        return '<article class="step" data-reveal style="--d:' + i * 80 + 'ms">' +
+          '<span class="step-num">0' + (i + 1) + "</span>" +
+          "<h3>" + esc(d.title) + "</h3><p>" + esc(d.desc) + "</p></article>";
+      }).join("");
+    });
   }
 
   /* ---------- 启动 ---------- */

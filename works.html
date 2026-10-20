@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>作品 · NOVA</title>
+  <meta name="description" content="NOVA 的作品集：网站、桌面程序与实验项目。" />
+  <meta name="theme-color" content="#05070c" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="works">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="NOVA 首页">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 21 7.6v8.8L12 21.5 3 16.4V7.6L12 2.5Z"/><path d="m8.2 12.2 2.6 2.6 5-5.4"/></svg>
+        </span>
+        <span data-bind="brand">NOVA</span>
+      </a>
+
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html" data-nav="home">首页</a>
+        <a href="works.html" data-nav="works">作品</a>
+        <a href="skills.html" data-nav="skills">Skills</a>
+        <a href="voice.html" data-nav="voice">配音</a>
+        <a href="about.html" data-nav="about">关于</a>
+      </nav>
+
+      <div class="header-cta">
+        <a class="btn btn-ghost btn-sm" href="about.html#contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          联系我
+        </a>
+        <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" data-nav="home">首页 <span>01</span></a>
+    <a href="works.html" data-nav="works">作品 <span>02</span></a>
+    <a href="skills.html" data-nav="skills">Skills <span>03</span></a>
+    <a href="voice.html" data-nav="voice">配音 <span>04</span></a>
+    <a href="about.html" data-nav="about">关于 <span>05</span></a>
+  </div>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">WORKS · 作品集</span>
+        <h1>写过的东西，<br />都在这里。</h1>
+        <p>从个人主页到桌面工具，再到跑在服务器上的小实验。每个项目都写清楚做了什么、用了什么、现在是什么状态。想了解某个项目的细节，可以直接来信。</p>
+        <div class="head-meta">
+          <span class="chip is-accent">6 个项目</span>
+          <span class="chip">2021 — 2026</span>
+          <span class="chip">网站 / 程序 / 实验</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="filters" data-filters></div>
+        <div class="work-grid" data-works></div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="cta" data-reveal>
+        <span class="eyebrow">OPEN FOR WORK</span>
+        <h2 style="margin-top: 16px">你的项目，<br />也可能是下一个。</h2>
+        <p>接网站开发、工具定制与 AI 工作流搭建。说一下你的场景，我会先给一个能落地的方案，再谈排期。</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" data-email href="mailto:hello@nova.studio" data-email-text>hello@nova.studio</a>
+          <a class="btn btn-ghost" href="skills.html">看看我的工作流</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="index.html">
+            <span class="logo-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 21 7.6v8.8L12 21.5 3 16.4V7.6L12 2.5Z"/><path d="m8.2 12.2 2.6 2.6 5-5.4"/></svg>
+            </span>
+            <span data-bind="brand">NOVA</span>
+          </a>
+          <p>一个独立开发者的数字仓库。把想法做成能看、能用、能听的东西。</p>
+        </div>
+        <div class="footer-col">
+          <h4>站点</h4>
+          <a href="works.html">作品</a>
+          <a href="skills.html">AI Skills</a>
+          <a href="voice.html">配音素材</a>
+          <a href="about.html">关于我</a>
+        </div>
+        <div class="footer-col">
+          <h4>找到我</h4>
+          <div data-socials>
+            <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://space.bilibili.com/" target="_blank" rel="noopener">Bilibili</a>
+            <a href="mailto:hello@nova.studio">Email</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> NOVA · 保留所有权利</span>
+        <span>DESIGNED IN THE DARK · BUILT WITH AI</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

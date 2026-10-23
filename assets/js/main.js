@@ -55,7 +55,7 @@
         (external ? ' target="_blank" rel="noopener"' : "") + ' data-reveal>' +
         '<div class="cover">' +
           '<span class="cover-num">' + num + '</span>' +
-          '<span class="cover-glyph">' + icon(w.icon) + '</span>' +
+          '<span class="cover-glyph">' + (w.image ? '<img class="cover-image" src="' + esc(w.image) + '" alt="" width="150" height="150" loading="lazy">' : icon(w.icon)) + '</span>' +
           '<span class="chip is-accent cover-type">' + esc(w.type) + '</span>' +
         '</div>' +
         '<div class="work-body">' +

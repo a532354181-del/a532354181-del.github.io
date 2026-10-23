@@ -81,6 +81,20 @@ window.SITE_DATA = {
   */
   works: [
     {
+      id: "dafeijing",
+      title: "大肥鲸 · 桌面陪伴与工作台",
+      summary: "Windows 11 桌宠：互动喂饭、AI 项目会话、文件收纳与本地待办月历，把提醒留给大肥鲸。",
+      type: "程序",
+      year: "2026",
+      hue: 200,
+      icon: "app",
+      image: "assets/img/dafeijing/logo.svg",
+      tags: ["Windows 11", "便携版 0.6.1"],
+      link: "dafeijing.html",
+      linkLabel: "了解与下载",
+      featured: true
+    },
+    {
       id: "xiaoyou-home",
       title: "个人主页 2.0",
       summary: "从零手写的作品集站点，暗色玻璃质感 + 滚动动效，Lighthouse 移动端 98 分。",

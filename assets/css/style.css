@@ -1722,3 +1722,6 @@ body.motion-ready.nav-open .mobile-menu a:nth-child(6) { animation-delay: 125ms;
   body { background: #fff; color: #111; }
   .bg-layer, .grain { display: none; }
 }
+
+/* Product artwork is optional; existing work glyphs retain their styles. */
+.cover-glyph .cover-image{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 22px #17244866)}

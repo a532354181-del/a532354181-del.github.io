@@ -89,7 +89,7 @@ window.SITE_DATA = {
       hue: 200,
       icon: "app",
       image: "assets/img/dafeijing/logo.svg",
-      tags: ["Windows 11", "便携版 0.6.1"],
+      tags: ["Windows 11", "便携版 0.6.2"],
       link: "dafeijing.html",
       linkLabel: "了解与下载",
       featured: true
